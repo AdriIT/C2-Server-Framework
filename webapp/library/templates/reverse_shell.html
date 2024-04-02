@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C2 Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+<style>
+
+    .container {
+        width: 100%;
+    }
+
+    .hero.is-primary{
+        background-color:rgb(39, 39, 39);
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Altezza del 100% della viewport (schermo) */
+    }
+    
+    /* CSS per abilitare lo scrolling automatico nel riquadro di log della chat */
+    #chat-log {
+        overflow-y: auto; /* Abilita lo scrolling verticale */
+        height: 700px; /* Imposta l'altezza massima del riquadro */
+        background-color: black;
+        color: white; /* text color */
+        margin-left: 10px;
+        margin-right:10px;
+        padding-right: 20px;
+        padding-left: 20px;
+        resize: none; /* Disable textarea resizing */
+    }
+
+    .send-button {
+        width: 80px;
+        height: 30px;
+        background-color: #706c74; /* Imposta il colore di sfondo desiderato */
+        margin-left: 10px;
+        color: white; /* Imposta il colore del testo */
+        border: none; 
+        cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    }
+    
+    .send-button:hover {
+        background-color: #08c4a4; /* Cambia il colore di sfondo al passaggio del mouse */
+    }
+
+    .small-input {
+        height: 30px;
+        width: 1755px; /* Imposta la larghezza desiderata */
+        margin-left: 10px;
+    }
+
+    .chat-input{
+        display: flex; /* Utilizza il layout flexbox */
+        align-items: center; /* Allinea gli elementi verticalmente al centro */
+    }
+
+
+</style>
+<body>
+    <section class="hero is-primary is-fullheight">
+        
+        <div class="hero-head">
+            
+            <nav class="navbar">
+  
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    
+                    <div class="navbar-start">
+                        {% if user.is_authenticated %}
+                            <a href="{%url 'devices'%}" class="navbar-item" style="font-size: 30px;">
+                                ⮨
+                            </a> 
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                
+            </nav>
+
+        </div>
+
+
+        {% block content %}
+        {% if user.is_authenticated %}
+        <body>
+            <h1 class="title" style="margin-left: 10px">Device #{{ device.id }}</h1>
+            <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+            <div class="chat-input">
+                <input id="chat-message-input" class="small-input"  type="text" ><br>
+                <input id="chat-message-submit" class="send-button" type="button" value="Send">
+            </div>
+            
+            <script>
+                
+                //const deviceId = JSON.parse(document.getElementById('device-id').textContent);  // Replace with the actual device ID-->
+                const deviceUsername = "{{ device.username }}";
+                const sender = "{{ sender }}";
+                console.log('WebSocket URL:', 'ws://' + window.location.host + '/ws/devices/' + deviceUsername + '/');
+                
+                const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/devices/' + deviceUsername + '/');
+        
+                chatSocket.onmessage = function(e) {
+                    const data = JSON.parse(e.data);
+                    // here
+                    if (data.message.toLowerCase() === '> clear') {
+                        // Pulisci il log della chat
+                        document.querySelector('#chat-log').value = '';
+                    } else {
+                        // Aggiungi il messaggio al log della chat
+                        document.querySelector('#chat-log').value += (data.message + '\n');
+                        if (chatLog.scrollHeight - chatLog.clientHeight <= chatLog.scrollTop + 1) {
+                            chatLog.scrollTop = chatLog.scrollHeight - chatLog.clientHeight;
+                        }
+                    }
+                
+                };
+        
+                chatSocket.onclose = function(e) {
+                    console.error('Chat socket closed unexpectedly');
+                };
+        
+                document.querySelector('#chat-message-input').focus();
+                document.querySelector('#chat-message-input').onkeyup = function(e) {
+                    if (e.keyCode === 13) {  // enter, return
+                        document.querySelector('#chat-message-submit').click();
+                    }
+                };
+        
+                document.querySelector('#chat-message-submit').onclick = function(e) {
+                    const messageInputDom = document.querySelector('#chat-message-input');
+                    const message = messageInputDom.value;
+                    chatSocket.send(JSON.stringify({
+        
+                        "message": '> ' + message,
+                        "sender": deviceUsername,
+                        
+                        //'user_id': ''  manda l'id dell'utente nel server per far capire chi è loggato
+                    }));
+        
+                    //pulisci il riquadro input dopo il submit
+                    messageInputDom.value = '';
+                };
+            </script>
+        </body>
+        {% endif %}
+        {% endblock %}
+        <div class="hero-body" style="padding: 2rem;">
+            
+            <div class="container has-text-centered">
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>C2 Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+</head>
+<style>
+    .hero.is-primary{
+        background-color:rgb(39, 39, 39);
+    }
+    
+    .device-list{
+        list-style-type: none;
+        display: grid;
+        padding: 0;
+        margin: 10px 0 0 0;
+        grid-template-columns: repeat(5, 1fr); /* Three columns with equal width */
+        grid-gap: 10px; /* Adjust the gap between items */
+
+    }
+
+    .device-item {
+        margin-bottom: 5px;
+        margin-left: 10px; /* Aggiunto per spostare verso il bordo sinistro */
+        padding: 10px;
+        text-align: left;
+        color: white;
+        display: block;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+
+    .device-item:nth-child(odd){
+        background-color:#686f75;
+    }
+    .device-item:nth-child(even){
+        background-color:#686f75;
+    }
+
+    .device-item a{
+        display: block;
+        text-decoration: none;
+    }
+
+</style>
+<body>
+    <section class="hero is-primary is-fullheight">
+        
+        <div class="hero-head">
+            
+            <nav class="navbar">
+                    
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    
+                    <div class="navbar-end">
+                        {% if user.is_authenticated %}
+                        <a href="{%url 'devices'%}" class="navbar-item">
+                            Home
+                        </a> 
+                        <a href="{%url 'logout'%}" class="navbar-item">
+                            Logout
+                        </a> 
+
+                        {% if device_list_heading %}
+                        <h1 class="title">&emsp;Device List:</h1>
+                        {% endif %}
+
+                        {% else %}
+    
+                        <a href="{%url 'index'%}" class="navbar-item">
+                            Home
+                        </a>                            
+                        <a href="{%url 'login'%}" class="navbar-item">
+                            Login
+                        </a>
+
+                        {% endif %}
+                    </div>
+                
+                </div>
+                
+            </nav>
+            {% if user.is_authenticated %}
+            <br>
+                <h1 class="title">&emsp;Devices List: 
+            
+                
+                </h1> 
+            {% endif %}
+        </div>
+        <div class="hero-body" style="padding: 2rem;">
+            
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

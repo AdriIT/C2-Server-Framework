@@ -1,0 +1,61 @@
+version: '3'
+services:
+
+  redis:
+    container_name: redis
+    image: redis
+    stdin_open: true
+    tty: true
+    ports: 
+      - "6379:6379"
+    depends_on:
+    - db
+
+  db:
+    container_name: db
+    image: postgres
+    ports: 
+      - "5432:5432"
+    stdin_open: true
+    tty: true
+    environment:
+      POSTGRES_DB: c2db
+      POSTGRES_USER: c2user
+      POSTGRES_PASSWORD: c2password
+
+  server:
+    container_name: server
+    build: ./webapp
+    stdin_open: true
+    tty: true
+    #command: python3 manage.py migrate
+    depends_on:
+    - redis
+    - db
+    - user
+
+  agent-47:
+    container_name: agent-47
+    build: ./agent
+    stdin_open: true
+    tty: true
+    depends_on:
+    - user
+    
+
+  user:
+    container_name: user
+    image: accetto/xubuntu-vnc-novnc-firefox:latest
+    stdin_open: true
+    tty: true
+    ports:
+    - "26901:6901"
+    - "25901:5901"
+  
+    depends_on:
+    - db
+
+
+    #to make a persistent database mount a volume
+    #volume: 
+
