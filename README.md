@@ -18,20 +18,22 @@ Open the terminal and write:<br>
 <br><br> __Run These Only Once:__ <br>
 `docker exec -d server python3 manage.py migrate`           --> run structural migration on the database based on webapp/library/migrations/0001_initial.py migration file<br>
 `docker exec -d server python3 manage.py createsuperuser`   --> create server admin and insert required data <br> <br>
-(_User interaction will be required to avoid having embed credentials. Feel free to automatize what you desire._)
-## ACCESSING C2 SERVER FROM BROWSER
-After activating the environment, open a browser tab and visit: http://localhost:26901/vnc.html?password=headless<br>
+_(User interaction will be required to avoid having embed credentials. Feel free to automatize what you desire.)_
+## ACCESSING C2 SERVER 
+After activating the environment, open a browser tab from your device and visit: http://localhost:26901/vnc.html?password=headless<br>
 You will be redirected to an interactive noVNC page. Connect, open Firefox inside this new "machine", and visit http://server:8000. <br>
 You will now see the home page of the C2 Server.  <br>
-From here u can login using your admin credentials you set during the SETUP, or access to Django admin management site on http://server:8000/admin, login with your admin credentials and create a new non-admin user. <br>
+From here u can login using your admin credentials you set during the SETUP. <br>
+_(Otherwise you can access to Django admin management site on http://server:8000/admin, login with your admin credentials and create a new non-admin user)_ <br>
 
-After authenticating you will be able to see all the devices which are connected to the server, or trying to, and their username and private IPs. <br> 
-By clicking on the "Access shell button" you will be able to communicate with one of them. Type "help" for some custom commands (I'm working through some of them). <br>
+After authenticating you will be able to see all the devices which are connected to the server along with their Usernames and private IPs. <br> 
+By clicking on the "Access shell button" you will be able to communicate with one of them. <br>
+Type "help" for some custom commands (I'm working through some of them). <br><br>
 To shut down the environment run `docker-compose down`.
 
 ## NOTES
 - You can manually add agents to the environment. Access the docker-compose.yaml file and add new agents, take inspiration from the already existing one
-- __Since im working on a way to manage sudo password on agents, some commands might not be fully working!!!__
+- __Since im working on a way to manage sudo password on agents, some commands might not be fully working!!!__<br>
 Hence, use this `echo 'password' | sudo -S` __`command`__ to send a command with high privileges  
 - The only way to actually "eliminate" an agent is by inputting "selfdestroy" command  
 - The automatic scroll of the chat is a mistery: it worked previously, now it doesnt. Working on it
