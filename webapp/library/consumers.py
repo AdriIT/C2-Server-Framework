@@ -37,13 +37,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json["message"]
         sender = text_data_json.get("sender", '')
         agent_info = text_data_json.get('agent_info', '')
-        
-        print("package", text_data_json)
-        print(user)
-        print("sender",sender)
-
         selfdestruct = text_data_json.get("selfdestroy", '')
-        print("selfd", selfdestruct)
+        #print("package", text_data_json)
+        #print(user)
+        #print("sender",sender)
+
+        
+        #print("selfd", selfdestruct)
         if selfdestruct == True:
             await sync_to_async(Device.objects.filter(username=text_data_json["agent"]).update)(status=False)
             print("destroyed")
@@ -59,18 +59,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 await self.close()
 
         else:
-            print("im here 1")
-            if sender == "":#reply
-                print("im here 2")
-                
+            if sender == "":#reply                
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["agent"], payload=message, type="R")
 
             else:#command
-                print("im here 3")
                 user = self.scope.get('user', '')
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["sender"], payload=message, type="C")
         
-        print("finished check")
          # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name, {"type": "chat.message", "message": message, "sender": sender})
