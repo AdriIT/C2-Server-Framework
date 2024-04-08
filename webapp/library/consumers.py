@@ -1,6 +1,5 @@
 #consumers.py
 import json
-import subprocess
 from library.models import Device, Message, User
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
@@ -20,6 +19,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         #print(self.device_id)
         # Join room group
+        print("accept")
         await self.accept()
         
         #print(subprocess.getoutput('ps'))
@@ -35,22 +35,38 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
-        sender = text_data_json["sender"]
+        sender = text_data_json.get("sender", '')
         agent_info = text_data_json.get('agent_info', '')
+        
+        print("package", text_data_json)
+        print(user)
+        print("sender",sender)
 
+        selfdestruct = text_data_json.get("selfdestroy", '')
+        print("selfd", selfdestruct)
+        if selfdestruct == True:
+            await sync_to_async(Device.objects.filter(username=text_data_json["agent"]).update)(status=False)
+            print("destroyed")
+
+
+            
         if agent_info != '':
             try:
                 await sync_to_async(Device.objects.get_or_create)(username=agent_info["username"], 
-                                                                  defaults={"ip": agent_info["ip"], "agent_location": agent_info["agent_location"]})
+                                                defaults={"ip": agent_info["ip"], "agent_location": agent_info["agent_location"], "status":True})
             except Exception as e: 
                 print(e)
                 await self.close()
-            
+
         else:
+            print("im here 1")
             if sender == "":#reply
+                print("im here 2")
+                
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["agent"], payload=message, type="R")
 
             else:#command
+                print("im here 3")
                 user = self.scope.get('user', '')
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["sender"], payload=message, type="C")
         
