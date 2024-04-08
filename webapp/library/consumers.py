@@ -39,12 +39,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         agent_info = text_data_json.get('agent_info', '')
 
         if agent_info != '':
-            await sync_to_async(Device.objects.get_or_create)(username=agent_info["username"], 
-                                            defaults={"ip": agent_info["ip"], "agent_location": agent_info["agent_location"]})
-        except Exception as e: 
-            print("Database not yet initialized. Try running makemigrations and migrate commands.", e)
-            await self.close()
-        
+            try:
+                await sync_to_async(Device.objects.get_or_create)(username=agent_info["username"], 
+                                                                  defaults={"ip": agent_info["ip"], "agent_location": agent_info["agent_location"]})
+            except Exception as e: 
+                print(e)
+                await self.close()
+            
         else:
             if sender == "":#reply
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["agent"], payload=message, type="R")
