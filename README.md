@@ -9,7 +9,7 @@ PostgreSQL serves as the database backend, offering elevated levels of data mana
 The entire system is containerized using Docker, which facilitates effortless deployment, scalability, and the handling of microservices. Additionally, a user interface accessible via a web browser is provided within a container. This interface simulates the behavior of a malevolent user device, allowing for comprehensive testing and evaluation of the system's robustness and security measures.
 
 ## REQUIREMENTS
-You will just need to have Docker, a terminal and a browser.
+You will just need to have Docker, a terminal, this project copied and a browser. 
 
 
 ## SETUP <br>
