@@ -8,7 +8,7 @@ class Device(models.Model):#id os ip mac regione
     username = models.CharField(max_length=30, unique=True)
     ip = models.GenericIPAddressField(default="NULL")
     agent_location = models.TextField(default="NULL")
-    
+    status = models.BooleanField()
 
     def __str__(self):
         return self.name
