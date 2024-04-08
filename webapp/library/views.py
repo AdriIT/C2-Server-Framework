@@ -12,7 +12,8 @@ class DeviceListView(generic.ListView):
     model = Device
     template_name = "device_list.html"
     context_object_name = "device_list"
-    queryset = Device.objects.all().order_by("-id")
+    queryset = Device.objects.filter(status=True).order_by("-id")
+    
 #    def get_context_data(self, *args, **kwargs):
 #            qs = super(DeviceListView, self).get_queryset(*args, *kwargs)
 #            qs = qs.order_by("-id")
