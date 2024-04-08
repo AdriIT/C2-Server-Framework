@@ -20,7 +20,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         #print(self.device_id)
         # Join room group
-        print("accept")
         await self.accept()
         
         #print(subprocess.getoutput('ps'))
@@ -39,23 +38,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender = text_data_json["sender"]
         agent_info = text_data_json.get('agent_info', '')
 
-        print(text_data_json)
-        print(user)
-        print(sender)
-
         if agent_info != '':
             await sync_to_async(Device.objects.get_or_create)(username=agent_info["username"], 
                                             defaults={"ip": agent_info["ip"], "agent_location": agent_info["agent_location"]})
+        except Exception as e: 
+            print("Database not yet initialized. Try running makemigrations and migrate commands.", e)
+            await self.close()
         
         else:
-            print("im here 1")
             if sender == "":#reply
-                print("im here 2")
-                
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["agent"], payload=message, type="R")
 
             else:#command
-                print("im here 3")
                 user = self.scope.get('user', '')
                 await sync_to_async(Message.objects.create)(user_id=user, device_id=text_data_json["sender"], payload=message, type="C")
         
