@@ -15,7 +15,7 @@ Open the terminal and write:<br>
 `docker-compose up --build`                                 --> build images for each container and start the containers, this will be your main command to activate the environment <br>
 <br><br> __Run These Only Once:__ <br>
 `docker exec -d server python3 manage.py migrate`           --> run structural migration on the database based on webapp/library/migrations/0001_initial.py migration file<br>
-`docker exec -d server python3 manage.py createsuperuser`   --> create server admin and insert your data <br>
+`docker exec -d server python3 manage.py createsuperuser`   --> create server admin and insert required data <br>
 ## ACCESSING C2 SERVER FROM USER CONTAINER
 After activating the environment, open a browser tab and visit: http://localhost:26901/vnc.html?password=headless<br>
 You will be redirected to a noVNC page. After connecting, open Firefox inside this new environment, and visit http://server:8000. <br>
