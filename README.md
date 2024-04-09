@@ -33,7 +33,7 @@ To shut down the environment run `docker-compose down`.
 
 ## NOTES
 - You can manually add agents to the environment. Access the docker-compose.yaml file and add new agents, take inspiration from the already existing one
-- __Since im working on a way to manage sudo password on agents, some commands might not be fully working!!!__<br>
+- __Since im working on a way to manage sudo password on agents, some commands might not be fully working!!!__
 Hence, use this `echo 'password' | sudo -S` __`command`__ to send a command with high privileges  
 - The only way to actually "eliminate" an agent is by inputting "selfdestroy" command  
 - The automatic scroll of the chat is a mistery: it worked previously, now it doesnt. Working on it
