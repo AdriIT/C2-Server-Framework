@@ -18,7 +18,7 @@ Open the terminal and write:<br>
 <br><br> __Run These Only Once:__ <br>
 `docker exec -d server python3 manage.py migrate`           --> run structural migration on the database based on webapp/library/migrations/0001_initial.py migration file<br>
 `docker exec -d server python3 manage.py createsuperuser`   --> create server admin and insert required data <br> <br>
-_(User interaction will be required to avoid having embed credentials. Feel free to automatize what you desire.)_
+_(This user interaction will be required to avoid having embed credentials. Feel free to automatize what you desire.)_
 ## ACCESSING C2 SERVER 
 After activating the environment, open a browser tab from your device and visit: http://localhost:26901/vnc.html?password=headless<br>
 You will be redirected to an interactive noVNC page. Connect, open Firefox inside this new "machine", and visit http://server:8000. <br>
