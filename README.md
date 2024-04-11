@@ -28,7 +28,7 @@ _(Otherwise you can access to Django admin management site on http://server:8000
 
 After authenticating you will be able to see all the devices which are connected to the server along with their Usernames and private IPs. <br> 
 By clicking on the "Access shell button" you will be able to communicate with one of them. <br>
-Type "help" for some custom commands (I'm working through some of them). <br><br>
+Type "help" to list custom commands (I'm working through some of them). <br><br>
 To shut down the environment run `docker-compose down`.
 
 ## NOTES
