@@ -1,5 +1,9 @@
 ## _DISCLAIMER_ 
 This project is developed for educational purposes as part of a university assignment and is not intended for any unauthorized or malicious use. Any use of this project outside its intended educational scope is the sole responsibility of the user.
+
+## WORKFLOW
+![workflow](C:\Users\adria\Desktop\workflow_git.jpg)
+
 ## OVERVIEW
 
 The framework is constructed on Django, a sophisticated Python web framework renowned for its emphasis on swift development and orderly, pragmatic design principles. For handling communications, Django Channels and Redis are employed. Both are invaluable tools for managing asynchronous and real-time communications effectively.
