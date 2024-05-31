@@ -3,7 +3,7 @@ This project is developed for educational purposes as part of a university assig
 
 ## WORKFLOW
 Here's a graphic image
-![workflow][width=0.5\textwidth, height=0.3\textheight, keepaspectratio](images/workflow_git.jpg)
+\includegraphics[width=0.5\textwidth, height=0.3\textheight, keepaspectratio]{images/workflow_git.jpg}
 
 ## OVERVIEW
 
