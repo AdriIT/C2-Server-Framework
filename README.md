@@ -2,8 +2,8 @@
 This project is developed for educational purposes as part of a university assignment and is not intended for any unauthorized or malicious use. Any use of this project outside its intended educational scope is the sole responsibility of the user.
 
 ## WORKFLOW
-Here's a graphic image
-<img src="images/workflow_git.jpg" alt="Project Workflow" width="500"/>
+Here's a graphic image<br>
+<img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
 
 ## OVERVIEW
 
