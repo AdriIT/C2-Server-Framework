@@ -1,10 +1,6 @@
 ## _DISCLAIMER_ 
 This project is developed for educational purposes as part of a university assignment and is not intended for any unauthorized or malicious use. Any use of this project outside its intended educational scope is the sole responsibility of the user.
 
-## WORKFLOW
-Here's a graphic image of the workflow:<br>
-<img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
-
 ## OVERVIEW
 
 The framework is constructed on Django, a sophisticated Python web framework renowned for its emphasis on swift development and orderly, pragmatic design principles. For handling communications, Django Channels and Redis are employed. Both are invaluable tools for managing asynchronous and real-time communications effectively.
@@ -12,6 +8,11 @@ The framework is constructed on Django, a sophisticated Python web framework ren
 PostgreSQL serves as the database backend, offering elevated levels of data management, superior performance, and the capability to handle large volumes of data seamlessly.
 
 The entire system is containerized using Docker, which facilitates effortless deployment, scalability, and the handling of microservices. Additionally, a user interface accessible via a web browser is provided within a container. This interface simulates the behavior of a malevolent user device, allowing for comprehensive testing and evaluation of the system's robustness and security measures.
+
+## WORKFLOW
+Here's a graphic image of the workflow:<br>
+<img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
+
 
 ## DATABASE
 A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":
