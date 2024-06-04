@@ -16,7 +16,7 @@ The entire system is containerized using Docker, which facilitates effortless de
 ## DATABASE
 A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br> Legend: <br> white attributes are primary keys if represented by "⋄", and keys if represented by "◦":
 
-<img src="images/ER.png" alt="ER" width="800"/>
+<img src="images/ER.png" alt="ER" width="400"/>
 
 
 
