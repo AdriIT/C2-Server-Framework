@@ -13,21 +13,12 @@ The entire system is containerized using Docker, which facilitates effortless de
 Here's a graphic image of the workflow:<br>
 <img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
 
-
 ## DATABASE
-A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":
-
+A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":<br>
 <img src="images/ER.png" alt="ER" width="400"/>
-
-
-
-
-
 
 ## REQUIREMENTS
 You will just need to have Docker, a terminal, this project copied and a browser. 
-
-
 
 ## SETUP <br>
 Open the terminal and write:<br>
@@ -36,6 +27,7 @@ Open the terminal and write:<br>
 `docker exec -d server python3 manage.py migrate`           --> run structural migration on the database based on webapp/library/migrations/0001_initial.py migration file<br>
 `docker exec -d server python3 manage.py createsuperuser`   --> create server admin and insert required data <br> <br>
 _(To prevent embedded credentials, user interaction will be required. Feel free to automate any desired process)_
+
 ## ACCESSING C2 SERVER 
 After activating the environment, open a browser tab from your device and visit: http://localhost:26901/vnc.html?password=headless<br>
 You will be redirected to an interactive noVNC page. Connect, open Firefox inside this new "machine", and visit http://server:8000. <br>
