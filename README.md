@@ -14,7 +14,7 @@ PostgreSQL serves as the database backend, offering elevated levels of data mana
 The entire system is containerized using Docker, which facilitates effortless deployment, scalability, and the handling of microservices. Additionally, a user interface accessible via a web browser is provided within a container. This interface simulates the behavior of a malevolent user device, allowing for comprehensive testing and evaluation of the system's robustness and security measures.
 
 ## DATABASE
-A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br> Legend: <br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":
+A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br> **Legend**<br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":
 
 <img src="images/ER.png" alt="ER" width="400"/>
 
