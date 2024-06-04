@@ -13,12 +13,6 @@ class DeviceListView(generic.ListView):
     template_name = "device_list.html"
     context_object_name = "device_list"
     queryset = Device.objects.filter(status=True).order_by("-id")
-    
-#    def get_context_data(self, *args, **kwargs):
-#            qs = super(DeviceListView, self).get_queryset(*args, *kwargs)
-#            qs = qs.order_by("-id")
-#            return qs
-
 
 
 
@@ -26,9 +20,7 @@ def reverse_shell(request, device_username):
     if request.user.is_authenticated:
         username = request.user.username
         device = get_object_or_404(Device, username=device_username)
-        return render(request, 'reverse_shell.html', {'device': device, 'sender': username})
-    #if request.method=='POST':
-    #    pass   
+        return render(request, 'reverse_shell.html', {'device': device, 'sender': username})  
     else:
         return redirect('login.html')
     

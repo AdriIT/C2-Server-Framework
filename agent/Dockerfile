@@ -10,11 +10,16 @@ RUN mkdir /.agent
 COPY . /.agent
 RUN rm /.agent/Dockerfile
 
+
+RUN mkdir try
+RUN echo "hello">try/hello.txt
 WORKDIR /
 
 # Install Agent dependancies on the container
 RUN pip install websocket-client
 RUN pip install psutil
+RUN pip install cryptography
+
 
 #try for x11
 # Install X11 server and other necessary dependencies
@@ -38,5 +43,5 @@ RUN pip install psutil
 
 # Start script
 #CMD [""]
-CMD ["python", ".agent/agent.py"]
+CMD ["python", "/.agent/agent.py","&&","cd","try"]
 

@@ -28,7 +28,6 @@ services:
     build: ./webapp
     stdin_open: true
     tty: true
-    #command: python3 manage.py migrate
     depends_on:
     - redis
     - db
@@ -42,6 +41,26 @@ services:
     depends_on:
     - user
     
+  agent-1:
+    container_name: agent-1
+    build: ./agent
+    stdin_open: true
+    tty: true
+    depends_on:
+    - user
+
+  agent-2:
+    container_name: agent-2
+    build: ./agent
+    stdin_open: true
+    tty: true
+    depends_on:
+    - user
+    
+    
+
+
+
 
   user:
     container_name: user
@@ -50,12 +69,6 @@ services:
     tty: true
     ports:
     - "26901:6901"
-    - "25901:5901"
-  
+    - "25901:5901"  
     depends_on:
     - db
-
-
-    #to make a persistent database mount a volume
-    #volume: 
-

