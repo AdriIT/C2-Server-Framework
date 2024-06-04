@@ -2,7 +2,7 @@
 This project is developed for educational purposes as part of a university assignment and is not intended for any unauthorized or malicious use. Any use of this project outside its intended educational scope is the sole responsibility of the user.
 
 ## WORKFLOW
-Here's a graphic image<br>
+Here's a graphic image of the workflow:<br>
 <img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
 
 ## OVERVIEW
@@ -13,8 +13,19 @@ PostgreSQL serves as the database backend, offering elevated levels of data mana
 
 The entire system is containerized using Docker, which facilitates effortless deployment, scalability, and the handling of microservices. Additionally, a user interface accessible via a web browser is provided within a container. This interface simulates the behavior of a malevolent user device, allowing for comprehensive testing and evaluation of the system's robustness and security measures.
 
+## DATABASE
+A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br> Legend: <br> white attributes are primary keys if represented by "⋄", and keys if represented by "◦":
+
+<img src="images/ER.jpg" alt="ER" width="800"/>
+
+
+
+
+
+
 ## REQUIREMENTS
 You will just need to have Docker, a terminal, this project copied and a browser. 
+
 
 
 ## SETUP <br>
