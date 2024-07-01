@@ -10,7 +10,7 @@ PostgreSQL serves as the database backend, offering elevated levels of data mana
 The entire system is containerized using Docker, which facilitates effortless deployment, scalability, and the handling of microservices. Additionally, a user interface accessible via a web browser is provided within a container. This interface simulates the behavior of a malevolent user device, allowing for comprehensive testing and evaluation of the system's robustness and security measures.
 
 ## WORKFLOW
-Here's a graphic image of the workflow:<br>
+Here's a graphic image of the workflow:<br><br>
 <img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
 
 ## DATABASE
@@ -29,14 +29,14 @@ Open the terminal and write:<br>
 _(To prevent embedded credentials, user interaction will be required. Feel free to automate any desired process)_
 
 ## ACCESSING C2 SERVER 
-After activating the environment, open a browser tab from your device and visit: http://localhost:26901/vnc.html?password=headless<br>
-You will be redirected to an interactive noVNC page. Connect, open Firefox inside this new "machine", and visit http://server:8000. <br>
+After activating the environment, open a browser tab from your device and visit: http://localhost:26901/vnc.html?password=headless<br><br>
+You will be redirected to an interactive noVNC page. Connect, open Firefox inside this new "machine", and visit http://server:8000. <br><br>
 You will now see the home page of the C2 Server.  <br>
 From here u can login using your admin credentials you set during the SETUP. <br>
 _(Otherwise you can access to Django admin management site on http://server:8000/admin, login with your admin credentials and create a new non-admin user)_ <br>
 
 After authenticating you will be able to see all the devices which are connected to the server along with their Usernames and private IPs. <br> 
-By clicking on the "Access shell button" you will be able to communicate with one of them. <br>
+By clicking on the "Access shell button" you will be able to communicate with one of them. <br><br>
 Type "help" to list custom commands (I'm working through some of them). <br><br>
 To shut down the environment run `docker-compose down`.
 
@@ -47,3 +47,12 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 - The only way to actually "eliminate" an agent is by inputting "selfdestroy" command. The agent will be destroyed, but its data will be present in the database to avoid data conflicts. 
 - The automatic scroll of the chat is a mistery: it worked previously, now it doesnt. Working on it
 
+
+## TODO 
+- add Kerberos
+- add keylogger function agent
+- sort, manage and rename devices
+- big data exfiltration
+- screenshot on device
+- profile management?
+- 
