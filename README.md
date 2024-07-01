@@ -35,7 +35,7 @@ You will now see the home page of the C2 Server.  <br>
 From here u can login using your admin credentials you set during the SETUP. <br>
 _(Otherwise you can access to Django admin management site on http://server:8000/admin, login with your admin credentials and create a new non-admin user)_ <br>
 
-After authenticating you will be able to see all the devices which are connected to the server along with their Usernames and private IPs. <br> 
+After authenticating you will be able to see all the devices which are connected to the server, along with Usernames and private IPs of their containers. <br> 
 By clicking on the "Access shell button" you will be able to communicate with one of them. <br><br>
 Type "help" to list custom commands (I'm working through some of them). <br><br>
 To shut down the environment run `docker-compose down`.
