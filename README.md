@@ -13,7 +13,9 @@ Here's a graphic image of the workflow:<br><br>
 <img src="images/workflow_git.jpg" alt="Project Workflow" width="800"/>
 
 ## DATABASE
-A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> white attributes are primary keys if represented by "◆", and keys if represented by "⚪":<br>
+A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> 
+"◆" = Primary Key<br>
+"⚪" = Key:<br>
 <img src="images/ER.png" alt="ER" width="400"/>
 
 ## REQUIREMENTS
