@@ -15,7 +15,7 @@ Here's a graphic image of the workflow:<br><br>
 ## DATABASE
 A minimal data structure is chosen to keep the database simple and efficient, facilitating management, maintenance, and insertion operations. <br><br> **Legend**<br> 
 "◆" = Primary Key<br>
-"⚪" = Key:<br>
+"⚪" = Key<br>
 <img src="images/ER.png" alt="ER" width="400"/>
 
 ## REQUIREMENTS
