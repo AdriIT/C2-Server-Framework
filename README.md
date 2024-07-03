@@ -50,16 +50,16 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 
 ## TODO 
 __Architectural Implementations__ <br>
-- add Kerberos ticketing for undesired auths<br>
+  - add Kerberos ticketing for undesired auths<br>
 __Agents Functions/Evasion Methods__ <br>
-- add keylogger function
-- IP Spoofing
-- DDoS functionality
-- big data exfiltration
-- screenshot<br>
+  - add keylogger function
+  - IP Spoofing
+  - DDoS functionality
+  - big data exfiltration
+  - screenshot<br>
 __WebApp Server__ <br>
-- sort, manage and rename devices
-- online devices green dot
-- profile management (not rlly needed)
-- settings for custom comms
+  - sort, manage and rename devices
+  - online devices green dot
+  - profile management (not rlly needed)
+  - settings for custom comms
 
