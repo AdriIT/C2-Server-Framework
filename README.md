@@ -49,11 +49,17 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 
 
 ## TODO 
-- add Kerberos for ticketing and auth
-- add keylogger function agent
+__Architectural Implementations__
+- add Kerberos ticketing for undesired auths
+__Agents Functions/Evasion Methods__
+- add keylogger function
+- IP Spoofing
+- DDoS functionality
+- big data exfiltration
+- screenshot
+__WebApp Server__
 - sort, manage and rename devices
 - online devices green dot
-- big data exfiltration
-- screenshot on device
-- profile management?
-- 
+- profile management (not rlly needed)
+- settings for custom comms
+
