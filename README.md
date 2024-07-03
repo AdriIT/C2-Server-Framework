@@ -42,7 +42,7 @@ To shut down the environment run `docker-compose down`.
 
 ## NOTES
 - You can manually add agents to the environment. Access the docker-compose.yaml file and add new agents, take inspiration from the already existing ones
-- __I'mm working on a way to manage input commands on agents!!!__ <br>
+- __I'm working on a way to manage input commands on agents!!!__ <br>
 Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send commands which require inputs   
 - The only way to actually "eliminate" an agent is by inputting "selfdestroy" command. The agent will be destroyed, but its data will be preserved in the database to avoid data conflicts
 - The automatic scroll of the chat is a mistery: it worked previously, now it doesnt. Working on it
@@ -50,14 +50,19 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 
 ## TODO 
 __Architectural Implementations__ <br>
+
   - add Kerberos ticketing for undesired auths<br>
+
 __Agents Functions/Evasion Methods__ <br>
+
   - add keylogger function
   - IP Spoofing
   - DDoS functionality
   - big data exfiltration
   - screenshot<br>
+
 __WebApp Server__ <br>
+  
   - sort, manage and rename devices
   - online devices green dot
   - profile management (not rlly needed)
