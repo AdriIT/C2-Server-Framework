@@ -54,6 +54,7 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 __Architectural Implementations__ <br>
 
   - add Kerberos ticketing?<br>
+  - disaster recovery policies
 
 __Agents Functions/Evasion Methods__ <br>
 
