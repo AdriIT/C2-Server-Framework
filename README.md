@@ -63,6 +63,7 @@ __Agents Functions/Evasion Methods__ <br>
   - DDoS functionality
   - big data exfiltration
   - screenshot<br>
+  - expansion policy
 
 __WebApp Server__ <br>
   
