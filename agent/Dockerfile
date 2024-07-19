@@ -11,6 +11,13 @@ COPY . /.agent
 RUN rm /.agent/Dockerfile
 
 
+#!!! check here
+RUN apt install iproute2
+RUN apt install openssh-server 
+#!!! check here
+
+
+
 RUN mkdir try
 RUN echo "hello">try/hello.txt
 WORKDIR /
