@@ -14,6 +14,7 @@ RUN rm /.agent/Dockerfile
 #!!! check here
 RUN apt install iproute2
 RUN apt install openssh-server 
+RUN apt install net-tools
 #!!! check here
 
 
