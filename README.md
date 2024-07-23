@@ -53,7 +53,7 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 ## TODO 
 __Architectural Implementations__ <br>
 
-  - clusterized multi server topology
+  - clusterized multi server topology (master/slave?)
   - add Kerberos ticketing?<br>
   - disaster recovery policies
 
