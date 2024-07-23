@@ -47,7 +47,6 @@ To shut down the environment run `docker-compose down`.
 - __I'm working on a way to manage input commands on agents!!!__ <br>
 Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send commands which require inputs   
 - The only way to actually "eliminate" an agent is by inputting "selfdestroy" command. The agent will be destroyed, but its data will be preserved in the database to avoid data conflicts
-- The automatic scroll of the chat is a mistery: it worked previously, now it doesnt. Working on it
 
 
 ## TODO 
@@ -69,6 +68,7 @@ __Agents Functions/Evasion Methods__ <br>
 __WebApp Server__ <br>
   
   - sort, manage and rename devices
+  - chat scroll mistery
   - online devices green dot
   - profile management (not rlly needed)
   - settings for custom comms
