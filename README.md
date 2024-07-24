@@ -68,7 +68,6 @@ __Agents Functions/Evasion Methods__ <br>
 __WebApp Server__ <br>
   
   - sort, manage and rename devices
-  - chat scroll mistery
   - online devices green dot
   - profile management (not rlly needed)
   - settings for custom comms
