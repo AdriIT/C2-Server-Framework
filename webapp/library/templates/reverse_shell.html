@@ -101,13 +101,6 @@
             
             <script>
 
-                function appendMessage(message) {
-                    // Append the message to the chat log
-                    chatLog.value += (message + '\n');
-                    // Automatically scroll to the bottom of the chat log
-                    chatLog.scrollTop = chatLog.scrollHeight;
-                }
-
                 //const deviceId = JSON.parse(document.getElementById('device-id').textContent);  // Replace with the actual device ID-->
                 const deviceUsername = "{{ device.username }}";
                 const sender = "{{ sender }}";
@@ -116,18 +109,20 @@
                 
                 const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/devices/' + deviceUsername + '/');
         
+
                 chatSocket.onmessage = function(e) {
                     const data = JSON.parse(e.data);
-                    // here
+                    // clear
                     if (data.message.toLowerCase() === '> clear') {
                         // Pulisci il log della chat
-                        document.querySelector('#chat-log').value = '';
+                        chatLog.value = '';
                     } else {
                         // Aggiungi il messaggio al log della chat
-                        //appendMessage(data.message);
-                        document.querySelector('#chat-log').value += (data.message + '\n');
-                        if (chatLog.scrollHeight - chatLog.clientHeight <= chatLog.scrollTop + 1) {
-                            chatLog.scrollTop = chatLog.scrollHeight - chatLog.clientHeight;
+
+                        chatLog.value += (data.message + '\n');
+                        // Imposta il puntatore alla fine della chat se supera i bordi
+                        chatLog.scrollTop = chatLog.scrollHeight;
+                            
                         }
                     }
                 
