@@ -59,10 +59,12 @@ __Architectural Implementations__ <br>
 __Agents Functions/Evasion Methods__ <br>
 
   - add keylogger function
+  - input commands
+  - X11 Server
   - IP Spoofing
   - DDoS functionality
-  - big data exfiltration
-  - screenshot<br>
+  - binary file exfiltration
+  - screenshot
   - virulent expansion policy
 
 __WebApp Server__ <br>
