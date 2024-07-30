@@ -50,13 +50,13 @@ Hence, use this semantic `echo 'password' | sudo -S` __`command`__ to send comma
 
 
 ## TODO 
-__Architectural Implementations__ <br>
+__Architectural Implementations__ 
 
   - clusterized multi server topology (master/slave?)
   - add Kerberos ticketing?<br>
   - disaster recovery policies
 
-__Agents Functions/Evasion Methods__ <br>
+__Agents Functions/Evasion Methods__ 
 
   - add keylogger function
   - input commands
@@ -67,7 +67,7 @@ __Agents Functions/Evasion Methods__ <br>
   - screenshot
   - virulent expansion policy
 
-__WebApp Server__ <br>
+__WebApp Server__ 
   
   - sort, manage and rename devices
   - online devices green dot
